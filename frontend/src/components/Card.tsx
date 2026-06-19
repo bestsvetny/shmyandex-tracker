@@ -26,27 +26,30 @@ export default function Card({ card, index, onClick }: Props) {
           {...provided.dragHandleProps}
           onClick={() => onClick(card)}
           data-testid={`card-${card.id}`}
-          className={`bg-white rounded-lg shadow-sm border border-slate-200 p-3 mb-2 cursor-pointer hover:border-blue-400 transition ${
-            snapshot.isDragging ? 'shadow-lg ring-2 ring-blue-400 rotate-1' : ''
+          className={`bg-1c-input-bg border border-1c-border-light p-2 mb-1 cursor-pointer text-1c-sm hover:bg-[#FFFFEE] ${
+            snapshot.isDragging ? 'shadow-1c-raised bg-[#FFFFF0]' : 'shadow-1c-sunken'
           }`}
         >
-          <p className="text-sm font-medium text-slate-800 break-words">{card.title}</p>
+          <div className="flex items-start gap-2">
+            <span className="text-1c-xs text-1c-text-muted whitespace-nowrap mt-0.5">#{card.id}</span>
+            <p className="font-bold text-1c-text break-words flex-1">{card.title}</p>
+          </div>
 
           {card.description && (
-            <p className="text-xs text-slate-500 mt-1 line-clamp-2 whitespace-pre-wrap break-words">
+            <p className="text-1c-xs text-1c-text-secondary mt-1 line-clamp-2 whitespace-pre-wrap break-words pl-6">
               {card.description}
             </p>
           )}
 
           {card.assignee && (
-            <div className="flex items-center gap-2 mt-3">
+            <div className="flex items-center gap-1.5 mt-2 pl-6">
               <span
                 aria-label={`Исполнитель: ${card.assignee}`}
-                className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 text-blue-700 text-[10px] font-semibold"
+                className="inline-flex items-center justify-center w-5 h-5 bg-1c-accent text-white text-[9px] font-bold"
               >
                 {initials(card.assignee)}
               </span>
-              <span className="text-xs text-slate-600 truncate">{card.assignee}</span>
+              <span className="text-1c-xs text-1c-text-secondary truncate">{card.assignee}</span>
             </div>
           )}
         </div>

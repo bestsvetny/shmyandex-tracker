@@ -1,6 +1,56 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{ts,tsx}'],
-  theme: { extend: {} },
+  theme: {
+    extend: {
+      colors: {
+        '1c': {
+          bg: '#D4D0C8',
+          surface: '#ECE9D8',
+          panel: '#F0EDE4',
+          border: '#808080',
+          'border-light': '#C0C0C0',
+          'border-dark': '#404040',
+          'border-highlight': '#FFFFFF',
+          text: '#000000',
+          'text-secondary': '#333333',
+          'text-muted': '#808080',
+          'header-bg': '#003399',
+          'header-text': '#FFFFFF',
+          'toolbar-bg': '#D4D0C8',
+          'toolbar-border': '#A0A0A0',
+          'menu-bg': '#F5F3EB',
+          'menu-hover': '#316AC5',
+          'accent': '#003399',
+          'accent-light': '#4472C4',
+          'btn-face': '#D4D0C8',
+          'btn-hover': '#E0DDD5',
+          'input-bg': '#FFFFFF',
+          'status-bar': '#ECE9D8',
+          'link': '#0000FF',
+          'danger': '#CC0000',
+          'warning': '#FF8C00',
+          'success': '#008000',
+          'selected': '#316AC5',
+          'selected-text': '#FFFFFF',
+        },
+      },
+      fontFamily: {
+        '1c': ['Tahoma', 'Segoe UI', 'Arial', 'sans-serif'],
+      },
+      fontSize: {
+        '1c-xs': ['11px', '14px'],
+        '1c-sm': ['12px', '16px'],
+        '1c-base': ['13px', '18px'],
+        '1c-lg': ['14px', '20px'],
+      },
+      boxShadow: {
+        '1c-raised': 'inset 1px 1px 0 #FFFFFF, inset -1px -1px 0 #808080, inset 2px 2px 0 #D4D0C8, inset -2px -2px 0 #404040',
+        '1c-sunken': 'inset -1px -1px 0 #FFFFFF, inset 1px 1px 0 #808080, inset -2px -2px 0 #D4D0C8, inset 2px 2px 0 #404040',
+        '1c-etched': 'inset 1px 1px 0 #808080, inset -1px -1px 0 #FFFFFF',
+        '1c-field': 'inset 1px 1px 0 #808080, inset -1px -1px 0 #FFFFFF, inset 2px 2px 0 #404040',
+      },
+    },
+  },
   plugins: [],
 };

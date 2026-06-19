@@ -10,4 +10,133 @@ body,
 
 body {
   margin: 0;
+  font-family: Tahoma, 'Segoe UI', Arial, sans-serif;
+  font-size: 13px;
+  -webkit-font-smoothing: auto;
+  background-color: #D4D0C8;
+  color: #000000;
+}
+
+/* 1C-style raised button */
+.btn-1c {
+  background-color: #D4D0C8;
+  border: none;
+  padding: 2px 12px;
+  font-family: Tahoma, 'Segoe UI', Arial, sans-serif;
+  font-size: 12px;
+  cursor: pointer;
+  box-shadow: inset 1px 1px 0 #FFFFFF, inset -1px -1px 0 #808080, inset 2px 2px 0 #D4D0C8, inset -2px -2px 0 #404040;
+  min-height: 24px;
+}
+
+.btn-1c:hover {
+  background-color: #E0DDD5;
+}
+
+.btn-1c:active {
+  box-shadow: inset -1px -1px 0 #FFFFFF, inset 1px 1px 0 #808080, inset -2px -2px 0 #D4D0C8, inset 2px 2px 0 #404040;
+  padding: 3px 11px 1px 13px;
+}
+
+.btn-1c:disabled {
+  color: #808080;
+  cursor: default;
+  text-shadow: 1px 1px 0 #FFFFFF;
+}
+
+/* 1C-style blue accent button */
+.btn-1c-primary {
+  background-color: #003399;
+  color: #FFFFFF;
+  border: none;
+  padding: 3px 16px;
+  font-family: Tahoma, 'Segoe UI', Arial, sans-serif;
+  font-size: 12px;
+  cursor: pointer;
+  box-shadow: inset 1px 1px 0 #4472C4, inset -1px -1px 0 #001a4d, inset 2px 2px 0 #336699, inset -2px -2px 0 #002266;
+  min-height: 24px;
+}
+
+.btn-1c-primary:hover {
+  background-color: #0044AA;
+}
+
+.btn-1c-primary:active {
+  box-shadow: inset -1px -1px 0 #4472C4, inset 1px 1px 0 #001a4d;
+  padding: 4px 15px 2px 17px;
+}
+
+.btn-1c-primary:disabled {
+  background-color: #808080;
+  cursor: default;
+}
+
+/* 1C-style input field */
+.input-1c {
+  background-color: #FFFFFF;
+  border: none;
+  box-shadow: inset 1px 1px 0 #808080, inset -1px -1px 0 #FFFFFF, inset 2px 2px 0 #404040;
+  padding: 3px 4px;
+  font-family: Tahoma, 'Segoe UI', Arial, sans-serif;
+  font-size: 13px;
+  outline: none;
+}
+
+.input-1c:focus {
+  background-color: #FFFFEE;
+}
+
+/* 1C-style panel with etched border */
+.panel-1c {
+  background-color: #ECE9D8;
+  box-shadow: inset 1px 1px 0 #808080, inset -1px -1px 0 #FFFFFF;
+  padding: 4px;
+}
+
+/* 1C-style raised panel */
+.panel-1c-raised {
+  background-color: #D4D0C8;
+  box-shadow: inset 1px 1px 0 #FFFFFF, inset -1px -1px 0 #808080;
+}
+
+/* 1C-style toolbar separator */
+.toolbar-separator {
+  width: 2px;
+  height: 20px;
+  margin: 0 4px;
+  box-shadow: inset 1px 0 0 #808080, inset -1px 0 0 #FFFFFF;
+}
+
+/* 1C-style window title bar */
+.titlebar-1c {
+  background: linear-gradient(to right, #003399, #4472C4);
+  color: #FFFFFF;
+  font-weight: bold;
+  font-size: 12px;
+  padding: 3px 6px;
+  user-select: none;
+}
+
+/* Scrollbar styling for 1C look */
+::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background: #D4D0C8;
+  box-shadow: inset 1px 1px 0 #808080;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D4D0C8;
+  box-shadow: inset 1px 1px 0 #FFFFFF, inset -1px -1px 0 #808080, inset 2px 2px 0 #D4D0C8, inset -2px -2px 0 #404040;
+}
+
+::-webkit-scrollbar-button {
+  background: #D4D0C8;
+  box-shadow: inset 1px 1px 0 #FFFFFF, inset -1px -1px 0 #808080;
+  display: block;
+  height: 16px;
+  width: 16px;
 }

@@ -6,9 +6,9 @@ import CardItem from './Card';
 import CardModal from './CardModal';
 
 const COLUMNS = [
-  { status: 'todo', title: 'К выполнению', accent: 'bg-slate-400' },
-  { status: 'in_progress', title: 'В работе', accent: 'bg-amber-400' },
-  { status: 'done', title: 'Готово', accent: 'bg-emerald-400' },
+  { status: 'todo', title: 'К выполнению', icon: '📋' },
+  { status: 'in_progress', title: 'В работе', icon: '⚙️' },
+  { status: 'done', title: 'Выполнено', icon: '✅' },
 ] as const;
 
 type ModalState =
@@ -115,39 +115,78 @@ export default function Board() {
   }
 
   return (
-    <div className="min-h-full flex flex-col bg-slate-100">
-      <header className="bg-white border-b border-slate-200 px-6 py-3 flex items-center justify-between">
-        <h1 className="text-xl font-bold text-slate-800">📋 Shmyandex Tracker</h1>
-        <div className="flex items-center gap-4">
-          <span className="text-sm text-slate-600">{user?.name}</span>
-          <button
-            onClick={logout}
-            className="text-sm text-slate-500 hover:text-slate-800 border border-slate-300 rounded-lg px-3 py-1"
-          >
-            Выйти
-          </button>
+    <div className="min-h-full flex flex-col bg-1c-bg font-1c">
+      {/* Title bar */}
+      <div className="titlebar-1c flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <span>&#128203;</span>
+          <span>1С:Предприятие — Управление задачами</span>
         </div>
-      </header>
+        <div className="flex gap-1" />
+      </div>
 
+      {/* Menu bar */}
+      <div className="bg-1c-surface border-b border-1c-border-light px-1 py-0.5 flex gap-0.5 text-1c-sm">
+        <span className="px-2 py-0.5 cursor-default">Файл</span>
+        <span className="px-2 py-0.5 cursor-default">Правка</span>
+        <span className="px-2 py-0.5 cursor-default">Операции</span>
+        <span className="px-2 py-0.5 cursor-default">Сервис</span>
+        <span className="px-2 py-0.5 cursor-default">Окна</span>
+        <span className="px-2 py-0.5 cursor-default">Справка</span>
+      </div>
+
+      {/* Toolbar */}
+      <div className="bg-1c-toolbar-bg border-b border-1c-border-light px-1 py-1 flex items-center gap-0.5">
+        <button
+          onClick={() => setModal({ type: 'create', defaultStatus: 'todo' })}
+          className="btn-1c flex items-center gap-1"
+        >
+          <span className="text-1c-success font-bold">+</span> Создать
+        </button>
+        <div className="toolbar-separator" />
+        <button
+          onClick={() => {
+            api.listCards()
+              .then(setCards)
+              .catch((e: Error) => setError(e.message));
+          }}
+          className="btn-1c flex items-center gap-1"
+        >
+          &#8635; Обновить
+        </button>
+        <div className="flex-1" />
+
+        <span className="text-1c-sm text-1c-text-secondary px-2">{user?.name}</span>
+        <div className="toolbar-separator" />
+        <button onClick={logout} className="btn-1c flex items-center gap-1">
+          &#128682; Завершить работу
+        </button>
+      </div>
+
+      {/* Error bar */}
       {error && (
-        <div className="bg-red-50 text-red-700 text-sm px-6 py-2 flex justify-between">
-          <span>{error}</span>
-          <button onClick={() => setError('')} className="font-medium">закрыть</button>
+        <div className="bg-[#FFF0F0] border-b border-1c-danger text-1c-danger text-1c-sm px-3 py-1 flex justify-between items-center">
+          <span>&#9888; {error}</span>
+          <button onClick={() => setError('')} className="btn-1c text-1c-xs">Закрыть</button>
         </div>
       )}
 
+      {/* Main content */}
       {loading ? (
-        <div className="flex-1 flex items-center justify-center text-slate-400">Загрузка…</div>
+        <div className="flex-1 flex items-center justify-center text-1c-text-muted text-1c-base">
+          Получение данных... Пожалуйста, подождите.
+        </div>
       ) : (
         <DragDropContext onDragEnd={handleDragEnd}>
-          <div className="flex-1 overflow-x-auto p-6">
-            <div className="flex gap-4 items-start min-w-max">
+          <div className="flex-1 overflow-x-auto p-2">
+            <div className="flex gap-2 items-start min-w-max">
               {COLUMNS.map((col) => (
-                <div key={col.status} className="w-80 bg-slate-200/60 rounded-xl flex flex-col">
-                  <div className="flex items-center gap-2 px-4 py-3">
-                    <span className={`w-2.5 h-2.5 rounded-full ${col.accent}`} />
-                    <h2 className="font-semibold text-slate-700">{col.title}</h2>
-                    <span className="text-xs text-slate-500 bg-slate-300/70 rounded-full px-2 py-0.5">
+                <div key={col.status} className="w-80 bg-1c-surface shadow-1c-etched flex flex-col">
+                  {/* Column header */}
+                  <div className="bg-1c-toolbar-bg shadow-1c-raised px-3 py-1.5 flex items-center gap-2">
+                    <span className="text-sm">{col.icon}</span>
+                    <span className="font-bold text-1c-sm text-1c-text">{col.title}</span>
+                    <span className="text-1c-xs text-1c-text-muted ml-auto panel-1c px-1.5">
                       {byStatus[col.status]?.length ?? 0}
                     </span>
                   </div>
@@ -157,8 +196,8 @@ export default function Board() {
                       <div
                         ref={provided.innerRef}
                         {...provided.droppableProps}
-                        className={`px-3 pb-2 min-h-[60px] transition-colors ${
-                          snapshot.isDraggingOver ? 'bg-blue-100/50' : ''
+                        className={`px-1.5 py-1 min-h-[60px] transition-colors ${
+                          snapshot.isDraggingOver ? 'bg-[#E8E8FF]' : ''
                         }`}
                       >
                         {byStatus[col.status]?.map((card, index) => (
@@ -176,9 +215,9 @@ export default function Board() {
 
                   <button
                     onClick={() => setModal({ type: 'create', defaultStatus: col.status })}
-                    className="text-left text-sm text-slate-500 hover:text-slate-800 hover:bg-slate-300/50 rounded-lg px-4 py-2 m-2 transition"
+                    className="text-left text-1c-sm text-1c-link hover:underline px-3 py-1.5 border-t border-1c-border-light bg-transparent cursor-pointer"
                   >
-                    + Добавить карточку
+                    + Добавить задачу
                   </button>
                 </div>
               ))}
@@ -186,6 +225,16 @@ export default function Board() {
           </div>
         </DragDropContext>
       )}
+
+      {/* Status bar */}
+      <div className="bg-1c-status-bar border-t border-1c-border px-1 flex text-1c-xs text-1c-text-muted">
+        <div className="panel-1c flex-1 px-2 py-0.5">
+          Задач: {cards.length} | К выполнению: {byStatus.todo?.length ?? 0} | В работе: {byStatus.in_progress?.length ?? 0} | Выполнено: {byStatus.done?.length ?? 0}
+        </div>
+        <div className="panel-1c px-2 py-0.5">
+          Пользователь: {user?.name}
+        </div>
+      </div>
 
       {modal && (
         <CardModal
